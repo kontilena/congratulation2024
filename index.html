@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поздравление с Днем программиста</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e90ff, #ff6f61);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: textSlide 3s ease forwards;
+        }
+
+        @keyframes textSlide {
+            0% {
+                transform: translateY(-300px);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .message {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            animation: buttonPulse 1s infinite;
+        }
+
+        @keyframes buttonPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .button:hover {
+            background-color: #ff8f85;
+            transition: background-color 0.3s ease;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.9;
+            animation: fall 3s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 С Днем программиста! 🎉</h1>
+        <div class="message">
+            <p>Пусть код компилируется с первого раза!</p>
+            <p>Ошибки исчезают быстрее, чем появляются!</p>
+            <p>Баги становятся фичами!</p>
+            <p>Пусть все проекты завершаются вовремя!</p>
+            <p>Счастья, удачи и вдохновения в коде!</p>
+        </div>
+        <button class="button" onclick="celebrate()">Празднуем!</button>
+    </div>
+
+    <script>
+        function createConfetti() {
+            const colors = ['#ff0', '#ff4d00', '#00ff00', '#0000ff', '#ff00ff'];
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * window.innerWidth + 'px'; // Позиция по X
+            confetti.style.top = '0px'; // Начальная позиция сверху
+            
+            // Дополнительное значение смещения по X для хаотичности
+
+            const randomXOffset = (Math.random() - 0.5) * 200; // значение смещения до 100 пикселей влево или вправо
+            confetti.style.transform = `translateX(${randomXOffset}px)`; // Применяем смещение
+
+            document.body.appendChild(confetti);
+
+            // Удаляем конфетти через 3 секунды
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+
+        function celebrate() {
+            const count = 300; // Количество конфетти
+            for (let i = 0; i < count; i++) {
+                setTimeout(createConfetti, i * 100); // Создание с задержкой для эффекта рассыпания
+            }
+        }
+    </script>
+</body>
+</html>
